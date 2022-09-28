@@ -1,4 +1,5 @@
 
+from crypt import methods
 from engine import training
 import csv
 import pickle
@@ -14,14 +15,10 @@ import create_db
 app = Flask(__name__)
 app.secret_key = "testing"
 app.config["SECRET_KEY"]
-#app.config['MONGO_URI'] = 'mongodb+srv://Shana:poker4747@cluster0.pkmeyze.mongodb.net/register_users?authSource=admin'
-
+#configuration of ComosDb in the Azure
 app.config['MONGO_URI'] = "mongodb://emosight:j5R1LYFyPkzkNz7csvGqtzcAphbJE8zd3ViR7TcoenEL78Up5gRS2KB7Xqf7tzz4KbKnTngi9Rp7e4pqPga2RQ==@emosight.mongo.cosmos.azure.com:10255/register_users?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@emosight@"
-
-
 mongo = PyMongo(app)
 reg_users = mongo
-# reg_users = mongo.db['register_users']
 sentiment_model = training()
 
 #Email setup for Contact us form
@@ -46,7 +43,7 @@ def sendContactForm(result):
     Email: {}
     Message: {}
     regards,
-    Webmaster
+    Shana
     """.format(result['name'], result['email'], result['message'])
 
     mail.send(msg)
@@ -112,7 +109,7 @@ def dashboard():
     return render_template('dashboard.html')
 
 
-@app.route('/contact')
+@app.route('/contact', methods=["GET","POST"])
 def contact():
     if request.method == 'POST':
         result = {}
