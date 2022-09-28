@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/login.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div>
+          <img src="/static/logo.png" alt="logo" height="100" />
+        </div>
+        <div class="icon">
+          <a href="/"> <img src="/static/home.png" alt="logo" height="50" /> </a>
+        </div>
+      </div>
+    </header>
+    <section class="login">
+      <form action="user_signup" class="form-bg" method="POST">
+        <div class="form">
+          <div>
+            <input type="email" name="email" placeholder="Email" class="custom-input" />
+          </div>
+          <div>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              class="custom-input"
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              name="confirm_password"
+              placeholder="Re-type Password"
+              class="custom-input"
+            />
+          </div>
+        </div>
+        <button class="btn" type="submit">Sign Up</button>
+        <!-- <button class="btn"><a href="/login" style="text-decoration: none; color: white;" >Sign In</a></button> -->
+      </form>
+    </section>
+  </body>
+</html>

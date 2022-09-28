@@ -1,0 +1,200 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.links {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+
+.btn {
+  margin-right: 30px;
+  border-radius: 5px;
+  padding: 12px 25px;
+  background-color: #e6e6e6;
+  border: 2px solid #525252;
+  text-transform: uppercase;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 50vh;
+  gap: 30px;
+  margin: 0 80px;
+}
+.box {
+  box-shadow: 0px 25px 10px -18px;
+  background-color: #fe6a82;
+  color: #837474;
+  height: 200px;
+  width: 280px;
+  font-size: 25px;
+  padding: 0 20px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.box p {
+  color: black;
+}
+
+.main h1 {
+  font-size: 60px !important;
+}
+
+.emosight h1{
+  font-size: 60px!important;
+  text-align: center;
+  margin: 2%;
+}
+
+.emosight p{
+  text-align: center;
+  margin-left:10% ;
+  margin-right: 10%;
+}
+
+.header-btn {
+  border-radius: 5px;
+  padding: 12px 10px;
+  background-color: #1a1a1a;
+  color: white;
+  text-transform: uppercase;
+  border: 2px solid yellow;
+}
+
+
+/*Upload file css*/
+
+
+.uploadfile{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+    gap: 4%;
+}
+.upbutton{
+  background-color: #fe6a82;
+    border: none;
+    color: white;
+    padding: 15px 35px 15px 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#loading{
+  text-align: center;
+}
+
+
+
+
+input[type="file"]::file-selector-button{
+  background-color: #fe6a82;
+    border: none;
+    color: white;
+    padding: 15px 30px 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2%;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+/* Datafile */
+
+.chartupbutton{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    background-color: #fe6a82;
+    border: none;
+    color: white;
+    padding: 15px 35px 15px 35px;
+    text-align: center;
+    text-decoration: none;
+    display: block!important;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    width: 15%;
+
+
+}
+
+
+/*Emosight*/
+
+.emosight-why h1{
+  font-size: 60px!important;
+  text-align: center;
+  margin: 2%;
+  margin-left: 19% ;
+  margin-right: 19%;
+}
+
+.emosight-why h2,h3{
+  font-size: 30px!important;
+  margin-left: 19% ;
+  margin-right: 19%;
+
+}
+
+.emosight-why p{
+
+  font-size: 20px;
+  line-height: 23px;
+  margin-left: 19% ;
+  margin-right: 19%;
+}
+
+.emosight-why ul li{
+
+  font-size: 20px;
+  line-height: 23px;
+  margin-left: 19% ;
+  margin-right: 19%;
+}

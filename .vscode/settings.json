@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/df5a99d0-9016-4da5-9a2f-66fd29f0c53a/AppServices/subscriptions/df5a99d0-9016-4da5-9a2f-66fd29f0c53a/resourceGroups/Flask/providers/Microsoft.Web/sites/emosight-web",
+    "appService.deploySubpath": "."
+}

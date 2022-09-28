@@ -1,0 +1,53 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+/* .btn {
+  margin-right: 30px;
+  border-radius: 5px;
+  padding: 12px 10px;
+  background-color: #e6e6e6;
+  border: 2px solid #525252;
+  text-transform: uppercase;
+}
+
+button:hover {
+  cursor: pointer; 
+}*/
+
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  gap: 30px;
+}
+.box {
+  box-shadow: 0px 25px 10px -18px;
+  background-color: #fe6a82;
+  color: #837474;
+  height: 200px;
+  width: 280px;
+  font-size: 25px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.box p {
+  color: black;
+}

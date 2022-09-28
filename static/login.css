@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  margin-right: 20px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+}
+.custom-input {
+  padding: 12px 10px;
+  font-size: 14px;
+  text-align: center;
+  background-color: #e6e6e6;
+  border: none;
+  border-radius: 5px;
+  width: 130px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.btn {
+  border-radius: 5px;
+  margin-top: 70px;
+  width: 250px;
+  padding: 12px 10px;
+  background-color: #1a1a1a;
+  color: white;
+  text-transform: uppercase;
+  border: 2px solid yellow;
+}
+
+button:hover {
+  cursor: pointer;
+}
