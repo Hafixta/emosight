@@ -59,7 +59,7 @@ def index():
 
 @app.route('/user_login', methods=['POST'])
 def login_user():
-    user_collection = reg_users
+    user_collection = mongo.db.register_users
     print('user collection', user_collection)
     if request.method == 'POST':
         print('yesssss')
