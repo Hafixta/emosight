@@ -166,7 +166,11 @@ def uploadfile():
             elif 'xlsx' in str(uploaded_file):
                 df = pd.read_excel(uploaded_file)
             else:
-                return "Please upload file with .csv or .xslx extension"
+                flash('No selected file')
+                return redirect(url_for('upload'))
+
+
+            
             coloms = df.columns
             print('coloms are:', coloms)
             df['text'] = df[coloms[1]]
