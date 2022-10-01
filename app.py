@@ -4,13 +4,16 @@ from engine import training
 import csv
 import pickle
 import pandas as pd
-from flask import Flask, render_template, url_for, request, session, redirect
+from flask import Flask, render_template, url_for, request, session, redirect, flash
 import os
 from flask_pymongo import PyMongo
 from flask_mail import Mail, Message
 import re
 import nltk
 import create_db
+from password_strength import PasswordPolicy
+from password_strength import PasswordStats
+
 
 app = Flask(__name__)
 app.secret_key = "testing"
@@ -49,6 +52,9 @@ def sendContactForm(result):
     mail.send(msg)
 
 
+
+
+
 @app.route('/')
 def index():
     return render_template('main.html')
@@ -74,12 +80,21 @@ def login_user():
         return 'Invalid username/password combination || OR || click on GET Started For Free to Signup'
 
 
+policy = PasswordPolicy.from_names(
+    length=8,  # min length: 8
+    uppercase=1,  # need min. 2 uppercase letters
+    numbers=1,  # need min. 2 digits
+    strength=0.66 # need a password that scores at least 0.5 with its entropy bits
+)
+app.config['SECRET_KEY'] = '@#$%^&*('
 @app.route('/user_signup', methods=['POST'])
 def signup_user():
     user_collection = mongo.db.register_users
     if request.method == 'POST':
         user = request.form["email"]
         pwd = request.form["password"]
+        stats = PasswordStats(pwd)
+        checkpolicy = policy.test(pwd)
         existing_user = user_collection.find_one({'email': user})
         if existing_user is None:
             user_collection.insert_one({'email': user, 'password': pwd})
