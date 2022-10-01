@@ -28,7 +28,9 @@
   font-weight: bold;
 }
 
-
+a{
+  text-decoration: none;
+}
 
 .btn {
   margin-right: 30px;
