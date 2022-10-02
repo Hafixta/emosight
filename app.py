@@ -152,6 +152,9 @@ def upload():
 def download():
     return render_template('download.html')
 
+@app.route('/upload-failed', methods=['GET', 'POST'])
+def failed():
+    return render_template('upload_failed.html')
 
 @app.route('/datafile', methods=['GET', 'POST'])
 def uploadfile():
@@ -166,8 +169,7 @@ def uploadfile():
             elif 'xlsx' in str(uploaded_file):
                 df = pd.read_excel(uploaded_file)
             else:
-                flash('No selected file')
-                return redirect(url_for('upload'))
+                return redirect(url_for('upload_failed'))
 
 
             
