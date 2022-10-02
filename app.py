@@ -152,7 +152,7 @@ def upload():
 def download():
     return render_template('download.html')
 
-@app.route('/upload-failed', methods=['GET', 'POST'])
+@app.route('/failed')
 def failed():
     return render_template('upload_failed.html')
 
