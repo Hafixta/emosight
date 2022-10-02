@@ -13,7 +13,7 @@ import nltk
 import create_db
 from password_strength import PasswordPolicy
 from password_strength import PasswordStats
-
+from random import randint
 
 app = Flask(__name__)
 app.secret_key = "testing"
@@ -25,19 +25,19 @@ reg_users = mongo
 sentiment_model = training()
 
 #Email setup for Contact us form
-app.config['MAIL_SERVER'] = 'earnfist.com'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'support@earnfist.com'
-app.config['MAIL_PASSWORD'] = 'eB(YIi4M24-='
+app.config['MAIL_USERNAME'] = 'netmobilefix@gmail.com'
+app.config['MAIL_PASSWORD'] = 'upwork1122'
 
 mail = Mail(app)
 
 #Send Message to the recipient upon submitting the contact us form
 def sendContactForm(result):
     msg = Message("Contact Form from Emosight Website",
-                  sender="support@earnfist.com",
-                  recipients=["hafixta@gmail.com", "info@hafixta.com"])
+                  sender="netmobilefix@gmail.com",
+                  recipients=["hafixta@gmail.com"])
 
     msg.body = """
     Hello there,
