@@ -4,6 +4,7 @@
 <head>
     <title>Users</title>
     <link rel="stylesheet" href="/static/main.css" />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
@@ -22,12 +23,7 @@
           </div>
         </div>
       </header>
-      {% extends 'base.html' %}
-      {% block header %}{% endblock %}
-      {% block content %}
-      {% if message %}
-      <h3 class="text-center">{{ message }}</h3>
-      {% endif %}
+
     <div id="content">
         <form class="uploadfile" action="/datafile" method="POST" enctype="multipart/form-data">
             <input type="file" name="csvfile" id="csvfile">
@@ -39,6 +35,10 @@
         </form>
         <div id="loading" style="display:none;"><img src="/static/loading.gif" width="100px" alt="" /></div>
     </div>
-    {% endblock %}
+
+
+
 </body>
+
+
 </html>
