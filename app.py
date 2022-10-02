@@ -1,5 +1,8 @@
 
 from crypt import methods
+import email
+from email import message
+from sre_constants import SUCCESS
 from engine import training
 import csv
 import pickle
@@ -13,7 +16,7 @@ import nltk
 import create_db
 from password_strength import PasswordPolicy
 from password_strength import PasswordStats
-from random import randint
+
 
 app = Flask(__name__)
 app.secret_key = "testing"
@@ -24,33 +27,17 @@ mongo = PyMongo(app)
 reg_users = mongo
 sentiment_model = training()
 
-#Email setup for Contact us form
+mail_settings = {
+    "MAIL_SERVER": 'smtp.gmail.com',
+    "MAIL_PORT": 465,
+    "MAIL_USE_TLS": False,
+    "MAIL_USE_SSL": True,
+    "MAIL_USERNAME": 'Ynetmobilefix@gmail.com',
+    "MAIL_PASSWORD": 'upwork1122'
+}
+
+app.config.update(mail_settings)
 mail = Mail(app)
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USE_TLS']=False
-app.config['MAIL_USERNAME'] = 'netmobilefix@gmail.com'
-app.config['MAIL_PASSWORD'] = 'upwork1122'
-
-#Send Message to the recipient upon submitting the contact us form
-def sendContactForm(result):
-    msg = Message("Contact Form from Emosight Website",
-                  sender="netmobilefix@gmail.com",
-                  recipients=["hafixta@gmail.com"])
-
-    msg.body = """
-    Hello there,
-    You just received a contact form.
-    Name: {}
-    Email: {}
-    Message: {}
-    regards,
-    Shana
-    """.format(result['name'], result['email'], result['message'])
-
-    mail.send(msg)
-
 
 
 
@@ -127,15 +114,22 @@ def dashboard():
 @app.route('/contact', methods=["GET","POST"])
 def contact():
     if request.method == 'POST':
-        result = {}
+        # result = {}
 
-        result['name'] = request.form['name']
-        result['email'] = request.form['email'].replace(' ', '').lower()
-        result['message'] = request.form['message']
+        # result['name'] = request.form['name']
+        # result['email'] = request.form['email'].replace(' ', '').lower()
+        # result['message'] = request.form['message']
 
-        sendContactForm(result)
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message= request.form.get('message')
 
-    return render_template('contact.html', **locals())
+        msg = Message(subject=f"Mail from{name}", body=f"Name:{name}\n E-mail: {email}\n\n{message}", sender="netmobilefix@gmail.com", recipients="hafixta@gmail.com")
+        mail.send(msg)
+        return render_template("contact.html", success=True)
+
+
+    return render_template('contact.html')
 
 
 @app.route('/emosight')
