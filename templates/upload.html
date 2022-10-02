@@ -22,8 +22,13 @@
           </div>
         </div>
       </header>
-    <div id="content"> 
+      {% extends 'base.html' %}
+      {% block header %}{% endblock %}
+      {% block content %}
+      {% if message %}
       <h3 class="text-center">{{ message }}</h3>
+      {% endif %}
+    <div id="content">
         <form class="uploadfile" action="/datafile" method="POST" enctype="multipart/form-data">
             <input type="file" name="csvfile" id="csvfile">
             <div >
@@ -34,6 +39,6 @@
         </form>
         <div id="loading" style="display:none;"><img src="/static/loading.gif" width="100px" alt="" /></div>
     </div>
-
+    {% endblock %}
 </body>
 </html>
