@@ -166,7 +166,7 @@ def uploadfile():
             elif 'xlsx' in str(uploaded_file):
                 df = pd.read_excel(uploaded_file)
             else:
-                return "Please upload file with .csv or .xslx extension"
+                return redirect(url_for('upload'))
 
 
             
