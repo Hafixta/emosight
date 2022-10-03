@@ -25,9 +25,10 @@ reg_users = mongo
 
 
 
-app.config['MAIL_SERVER'] = 'mail.web-design-johannesburg.com'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USERNAME'] = 'testing@web-design-johannesburg.com'
 app.config['MAIL_PASSWORD'] = 'testingpassword'
 
@@ -36,9 +37,9 @@ mail = Mail(app)
 sentiment_model = training()
 
 def sendContactForm(result):
-    msg = Message("Contact Form from Skolo Website",
-                  sender="testing@web-design-johannesburg.com",
-                  recipients=["matshidis@gmail.com", "bertha.kgokong@tatisoftware.com"])
+    msg = Message("Contact Form from Emosight",
+                  sender="netmobilefix@gmail.com",
+                  recipients=["alivealive909@gmail.com", "hafixta@gmail.com "])
 
     msg.body = """
     Hello there,
