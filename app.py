@@ -27,11 +27,12 @@ reg_users = mongo
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USERNAME'] = 'netmobilefix@gmail.com'
 app.config['MAIL_PASSWORD'] = 'direrhsfycidlavr'
-
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_DEBUG'] = True
+app.config['MAIL_SUPPRESS_SEND'] = False
 
 mail = Mail(app)
 
