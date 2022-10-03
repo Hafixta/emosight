@@ -1,20 +1,8 @@
-/* .header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.icon {
-  margin-right: 20px;
-}
-
-.icon:hover {
-  cursor: pointer;
-} */
-
 .contact {
   display: flex;
   flex-direction: column;
   min-height: 60vh;
+  margin-top: 5%;
 }
 
 .form {
@@ -62,4 +50,8 @@ textarea:focus {
 
 button:hover {
   cursor: pointer;
+}
+
+#text{
+  text-align: center;
 }

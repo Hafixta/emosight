@@ -1,9 +1,8 @@
-from crypt import methods
 from engine import training
 import csv
 import pickle
 import pandas as pd
-from flask import Flask, render_template, url_for, request, session, redirect, flash
+from flask import Flask, render_template, url_for, request, session, redirect, flash, make_response
 import os
 from flask_pymongo import PyMongo
 from flask_mail import Mail, Message
@@ -12,6 +11,7 @@ import nltk
 import create_db
 from password_strength import PasswordPolicy
 from password_strength import PasswordStats
+import random
 
 
 app = Flask(__name__)
@@ -26,14 +26,12 @@ reg_users = mongo
 
 
 app.config['MAIL_DEBUG'] = True
-app.config['MAIL_SERVER'] = 'smtp.ionos.com'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'testing@web-designpakistan.com'
-app.config['MAIL_PASSWORD'] = 'Lawrence1234**'
-app.config['MAIL_DEFAULT_SENDER'] = ('testing@web-designpakistan.com')
-
+app.config['MAIL_USERNAME'] = 'netmobilefix@gmail.com'
+app.config['MAIL_PASSWORD'] = 'troewcsmtyqyvkdk'
 mail = Mail(app)
 
 
@@ -41,22 +39,21 @@ sentiment_model = training()
 
 def sendContactForm(result):
     msg = Message("Contact Form from Emosight",
-                  sender="netmobilefix@gmail.com",
-                  recipients=["alivealive909@gmail.com", "hafixta@gmail.com "])
+                  sender=app.config['MAIL_USERNAME'],
+                  recipients=["alivealive909@gmail.com", "iamshushanna@gmail.com"])
 
     msg.body = """
-    Hello there,
-    You just received a contact form.
+    Hello Shushanna,
+    You just received a contact form from Visitor.
+
     Name: {}
     Email: {}
     Message: {}
     regards,
-    Webmaster
+    Shana
     """.format(result['name'], result['email'], result['message'])
 
     mail.send(msg)
-
-
 
 
 @app.route('/')
@@ -130,6 +127,7 @@ def dashboard():
 
 @app.route('/contact', methods=["GET","POST"])
 def contact():
+    data = {"msg": ""}
     if request.method == 'POST':
         result = {}
         
@@ -138,11 +136,11 @@ def contact():
         result['message'] = request.form['message']
 
         sendContactForm(result)
+        print(result)
+        data = {"msg": "Your Form is submitted successfully!"}
 
-        return render_template('contact.html', **locals())
 
-
-    return render_template('contact.html', **locals())
+    return render_template('contact.html', data=data)
 
 
 @app.route('/emosight')
@@ -158,6 +156,38 @@ def upload():
 @app.route('/download')
 def download():
     return render_template('download.html')
+
+@app.route('/forgot', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form['email']
+        randNo = random.randint(100000, 999999)
+        session['code'] = randNo
+        session['email'] = email
+        msg = Message('reset code', sender=app.config['MAIL_USERNAME'], recipients=[email])
+        msg.body = str(randNo)
+        mail.send(msg)
+        return render_template('newpassword.html')
+
+    return render_template('forgot.html')
+
+@app.route('/new_pass', methods=['GET', 'POST'])
+def new_password():
+    user_collection = mongo.db.register_users
+    if request.method == 'POST':
+        if str(request.form['code']) == str(session['code']):
+            filter = { 'email': session['email']  }
+            # Values to be updated.
+            newvalues = { "$set": { 'password': request.form['newpassword'] } }
+            
+            # Using update_one() method for single
+            # updation.
+            user_collection.update_one(filter, newvalues)
+    
+            return redirect(url_for('dashboard'))
+
+        return make_response("Some error while resetting")
+    return render_template("forgot.html")
 
 
 @app.route('/datafile', methods=['GET', 'POST'])
