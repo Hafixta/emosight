@@ -1,4 +1,4 @@
-from crypt import methods
+# from crypt import methods
 from engine import training
 import csv
 import pickle
@@ -26,13 +26,13 @@ reg_users = mongo
 
 
 app.config['MAIL_DEBUG'] = True
-app.config['MAIL_SERVER'] = 'smtp.ionos.com'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'testing@web-designpakistan.com'
-app.config['MAIL_PASSWORD'] = 'Lawrence1234**'
-app.config['MAIL_DEFAULT_SENDER'] = ('testing@web-designpakistan.com')
+app.config['MAIL_USERNAME'] = 'netmobilefix@gmail.com'
+app.config['MAIL_PASSWORD'] = 'troewcsmtyqyvkdk'
+# app.config['MAIL_DEFAULT_SENDER'] = ('testing@web-designpakistan.com')
 mail = Mail(app)
 
 
@@ -40,7 +40,7 @@ sentiment_model = training()
 
 def sendContactForm(result):
     msg = Message("Contact Form from Emosight",
-                  sender="netmobilefix@gmail.com",
+                  sender=app.config['MAIL_USERNAME'],
                   recipients=["alivealive909@gmail.com", "hafixta@gmail.com "])
 
     msg.body = """
@@ -125,16 +125,6 @@ def model_result():
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     return render_template('dashboard.html')
-
-@app.route('/send-mail')
-def send_mail():
-	# try:
-    msg = Message("Send Mail Tutorial!",recipients=["alivealive909@gmail.com"])
-    msg.html = "Yo!Have you heard the good word of Python???"           
-    mail.send(msg)
-    return 'Mail sent!'
-
-
 
 
 @app.route('/contact', methods=["GET","POST"])
