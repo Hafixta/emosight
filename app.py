@@ -76,9 +76,9 @@ def login_user():
                 session['email'] = username
                 return redirect(url_for('dashboard'))
             else:
-                return ("please enter valid password")
+                return render_template('login.html')
 
-        return 'Invalid username/password combination || OR || click on GET Started For Free to Signup'
+        return render_template('login.html')
 
 
 policy = PasswordPolicy.from_names(
