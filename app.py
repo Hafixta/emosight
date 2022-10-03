@@ -122,6 +122,10 @@ def dashboard():
     return render_template('dashboard.html')
 
 
+@app.route('/sucess')
+def sucess():
+    return render_template('success.html')
+
 @app.route('/contact', methods=["GET","POST"])
 def contact():
     if request.method == 'POST':
@@ -132,10 +136,10 @@ def contact():
         result['message'] = request.form['message']
 
         sendContactForm(result)
-        return render_template('contact.html', **locals())
+        return render_template('sucess.html')
 
 
-    return render_template('contact.html')
+    return render_template('success.html')
 
 
 @app.route('/emosight')
