@@ -63,3 +63,7 @@ textarea:focus {
 button:hover {
   cursor: pointer;
 }
+
+#text{
+  text-align: center;
+}
