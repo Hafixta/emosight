@@ -29,8 +29,8 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USERNAME'] = 'testing@web-design-johannesburg.com'
-app.config['MAIL_PASSWORD'] = 'testingpassword'
+app.config['MAIL_USERNAME'] = 'netmobilefix@gmail.com'
+app.config['MAIL_PASSWORD'] = 'upwork1122'
 
 mail = Mail(app)
 
