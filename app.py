@@ -126,6 +126,16 @@ def model_result():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/send-mail')
+def send_mail():
+	# try:
+    msg = Message("Send Mail Tutorial!",recipients=["alivealive909@gmail.com"])
+    msg.html = "Yo!Have you heard the good word of Python???"           
+    mail.send(msg)
+    return 'Mail sent!'
+
+
+
 
 @app.route('/contact', methods=["GET","POST"])
 def contact():
@@ -137,6 +147,7 @@ def contact():
         result['message'] = request.form['message']
 
         sendContactForm(result)
+        print(result)
 
         return render_template('contact.html', **locals())
 
