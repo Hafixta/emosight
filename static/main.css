@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .header {
   display: flex;
   justify-content: space-between;
@@ -200,7 +199,6 @@ input[type="file"]::file-selector-button{
   line-height: 23px;
   margin-left: 19% ;
   margin-right: 19%;
-=======
 .header {
   display: flex;
   justify-content: space-between;
@@ -402,5 +400,4 @@ input[type="file"]::file-selector-button{
   line-height: 23px;
   margin-left: 19% ;
   margin-right: 19%;
->>>>>>> b2a7e715ed3e8d6d92cb7fd20be7ecce3802da14
 }

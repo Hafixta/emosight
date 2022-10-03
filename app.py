@@ -127,7 +127,7 @@ def contact():
         return render_template('sucess.html')
 
 
-    return render_template('success.html')
+    return render_template('contact.html')
 
 
 @app.route('/emosight')
