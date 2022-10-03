@@ -124,7 +124,7 @@ def contact():
         result['message'] = request.form['message']
 
         sendContactForm(result)
-        return render_template('sucess.html')
+        return redirect(url_for('success'))
 
 
     return render_template('contact.html')
