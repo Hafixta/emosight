@@ -1,43 +1,43 @@
 
+from crypt import methods
 from engine import training
 import csv
 import pickle
 import pandas as pd
-from flask import Flask, render_template, url_for, request, session, redirect
+from flask import Flask, render_template, url_for, request, session, redirect, flash
 import os
 from flask_pymongo import PyMongo
 from flask_mail import Mail, Message
 import re
 import nltk
 import create_db
+from password_strength import PasswordPolicy
+from password_strength import PasswordStats
+
+
 
 app = Flask(__name__)
 app.secret_key = "testing"
 app.config["SECRET_KEY"]
-#app.config['MONGO_URI'] = 'mongodb+srv://Shana:poker4747@cluster0.pkmeyze.mongodb.net/register_users?authSource=admin'
-
+#configuration of ComosDb in the Azure
 app.config['MONGO_URI'] = "mongodb://emosight:j5R1LYFyPkzkNz7csvGqtzcAphbJE8zd3ViR7TcoenEL78Up5gRS2KB7Xqf7tzz4KbKnTngi9Rp7e4pqPga2RQ==@emosight.mongo.cosmos.azure.com:10255/register_users?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@emosight@"
-
-
 mongo = PyMongo(app)
 reg_users = mongo
-# reg_users = mongo.db['register_users']
 sentiment_model = training()
 
-#Email setup for Contact us form
-app.config['MAIL_SERVER'] = 'earnfist.com'
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'support@earnfist.com'
-app.config['MAIL_PASSWORD'] = 'eB(YIi4M24-='
+app.config['MAIL_USERNAME'] = 'netmobilefix@gmail.com'
+app.config['MAIL_PASSWORD'] = 'upwork1122'
 
 mail = Mail(app)
 
-#Send Message to the recipient upon submitting the contact us form
 def sendContactForm(result):
-    msg = Message("Contact Form from Emosight Website",
-                  sender="support@earnfist.com",
-                  recipients=["hafixta@gmail.com", "info@hafixta.com"])
+    msg = Message("Contact Form from Emosight",
+                  sender="netmobilefix@gmail.com",
+                  recipients=["alivealive909@gmail.com", "pdh.usman007@gmail.com"])
 
     msg.body = """
     Hello there,
@@ -50,6 +50,7 @@ def sendContactForm(result):
     """.format(result['name'], result['email'], result['message'])
 
     mail.send(msg)
+
 
 
 @app.route('/')
@@ -77,12 +78,21 @@ def login_user():
         return 'Invalid username/password combination || OR || click on GET Started For Free to Signup'
 
 
+policy = PasswordPolicy.from_names(
+    length=8,  # min length: 8
+    uppercase=1,  # need min. 2 uppercase letters
+    numbers=1,  # need min. 2 digits
+    strength=0.66 # need a password that scores at least 0.5 with its entropy bits
+)
+app.config['SECRET_KEY'] = '@#$%^&*('
 @app.route('/user_signup', methods=['POST'])
 def signup_user():
     user_collection = mongo.db.register_users
     if request.method == 'POST':
         user = request.form["email"]
         pwd = request.form["password"]
+        stats = PasswordStats(pwd)
+        checkpolicy = policy.test(pwd)
         existing_user = user_collection.find_one({'email': user})
         if existing_user is None:
             user_collection.insert_one({'email': user, 'password': pwd})
@@ -112,7 +122,7 @@ def dashboard():
     return render_template('dashboard.html')
 
 
-@app.route('/contact')
+@app.route('/contact', methods=["GET","POST"])
 def contact():
     if request.method == 'POST':
         result = {}
@@ -122,8 +132,10 @@ def contact():
         result['message'] = request.form['message']
 
         sendContactForm(result)
+        return render_template('contact.html', **locals())
 
-    return render_template('contact.html', **locals())
+
+    return render_template('contact.html')
 
 
 @app.route('/emosight')
@@ -154,7 +166,10 @@ def uploadfile():
             elif 'xlsx' in str(uploaded_file):
                 df = pd.read_excel(uploaded_file)
             else:
-                return "Please upload file with .csv or .xslx extension"
+                return redirect(url_for('upload'))
+
+
+            
             coloms = df.columns
             print('coloms are:', coloms)
             df['text'] = df[coloms[1]]

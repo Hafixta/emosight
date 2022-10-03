@@ -4,26 +4,9 @@
 <head>
     <title>Users</title>
     <link rel="stylesheet" href="/static/main.css" />
-    <!-- <style>
-        div#content {
-            display: none;
-        }
 
-        /* div#loading {
-            width: 35px;
-            height: 35px;
-            display: none;
-            background: url(/static/loading.gif) no-repeat;
-            cursor: wait;
-        } */
-    </style> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- <script type="text/javascript">// <![CDATA[
-        function loading() {
-            $("#loading").show();
-            $("#content").hide();
-        }
-    // ]]></script> -->
+
 
 </head>
 
@@ -40,19 +23,9 @@
           </div>
         </div>
       </header>
-
     <div id="content">
         <form class="uploadfile" action="/datafile" method="POST" enctype="multipart/form-data">
             <input type="file" name="csvfile" id="csvfile">
-            <!-- <div class="mb">
-                <label for="">Please Enter Model name: </label>
-            </div> -->
-            <!-- <div>
-                <input type="text" name="modelname" placeholder="Enter model name" class="input">
-            </div> -->
-            <!-- <div>
-                <input type="submit" name="anything_submit" value="Submit" onclick="loading();">
-            </div> -->
             <div >
                 <button class="upbutton" type="submit" onclick="$('#loading').show();">
                     Upload File
@@ -61,7 +34,7 @@
         </form>
         <div id="loading" style="display:none;"><img src="/static/loading.gif" width="100px" alt="" /></div>
     </div>
-    <!-- <div id="loading"></div> -->
+
 
 
 </body>
