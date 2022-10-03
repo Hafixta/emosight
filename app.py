@@ -15,7 +15,6 @@ from password_strength import PasswordPolicy
 from password_strength import PasswordStats
 
 
-
 app = Flask(__name__)
 app.secret_key = "testing"
 app.config["SECRET_KEY"]
@@ -39,17 +38,6 @@ def sendContactForm(result):
                   sender="netmobilefix@gmail.com",
                   recipients=["alivealive909@gmail.com", "pdh.usman007@gmail.com"])
 
-    msg.body = """
-    Hello there,
-    You just received a contact form.
-    Name: {}
-    Email: {}
-    Message: {}
-    regards,
-    Webmaster
-    """.format(result['name'], result['email'], result['message'])
-
-    mail.send(msg)
 
 
 
