@@ -126,7 +126,8 @@ def contact():
 
         msg = Message(subject=f"Mail from{name}", body=f"Name:{name}\n E-mail: {email}\n\n{message}", sender="netmobilefix@gmail.com", recipients="hafixta@gmail.com")
         mail.send(msg)
-        return render_template("contact.html", success=True)
+        flash("Your form submitted Successfully!")
+        return render_template("contact.html")
 
 
     return render_template('contact.html')
