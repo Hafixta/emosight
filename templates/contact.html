@@ -21,11 +21,10 @@
         </div>
       </div>
     </header>
-    {% if success %}
-    <div class="alert alert-success" role="alert" >
-      Your Message has been sent successfully!
-    </div>
-    {% endif %}
+
+    {% for message in get_flashed_messages() %}
+      {{ message }}
+    {% end for %}
     <section class="contact">
       <form name="SentMessage" id="contactform" method="POST">
         <div class="form">
