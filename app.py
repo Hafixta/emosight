@@ -1,4 +1,3 @@
-
 from crypt import methods
 from engine import training
 import csv
@@ -23,22 +22,6 @@ app.config['MONGO_URI'] = "mongodb://emosight:j5R1LYFyPkzkNz7csvGqtzcAphbJE8zd3V
 mongo = PyMongo(app)
 reg_users = mongo
 sentiment_model = training()
-
-
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'netmobilefix@gmail.com'
-app.config['MAIL_PASSWORD'] = 'upwork1122'
-
-mail = Mail(app)
-
-def sendContactForm(result):
-    msg = Message("Contact Form from Emosight",
-                  sender="netmobilefix@gmail.com",
-                  recipients=["alivealive909@gmail.com", "pdh.usman007@gmail.com"])
-
-
 
 
 @app.route('/')
@@ -110,23 +93,8 @@ def dashboard():
     return render_template('dashboard.html')
 
 
-@app.route('/sucess')
-def sucess():
-    return render_template('success.html')
-
 @app.route('/contact', methods=["GET","POST"])
 def contact():
-    if request.method == 'POST':
-        result = {}
-
-        result['name'] = request.form['name']
-        result['email'] = request.form['email'].replace(' ', '').lower()
-        result['message'] = request.form['message']
-
-        sendContactForm(result)
-        return redirect(url_for('success'))
-
-
     return render_template('contact.html')
 
 
