@@ -25,18 +25,32 @@ reg_users = mongo
 
 
 
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'netmobilefix@gmail.com'
-app.config['MAIL_PASSWORD'] = 'rqemvapgntrgdata'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
+# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USERNAME'] = 'netmobilefix@gmail.com'
+# app.config['MAIL_PASSWORD'] = 'rqemvapgntrgdata'
+# app.config['MAIL_USE_TLS'] = False
+# app.config['MAIL_USE_SSL'] = True
+# app.config['MAIL_DEBUG'] = True
+# app.config['MAIL_SUPPRESS_SEND'] = False
+
+# mail = Mail(app)
+
+sentiment_model = training()
+
+
 app.config['MAIL_DEBUG'] = True
-app.config['MAIL_SUPPRESS_SEND'] = False
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = 'testing@web-designpakistan.com'
+app.config['MAIL_PASSWORD'] = 'rqemvapgntrgdata'
+app.config['MAIL_DEFAULT_SENDER'] = ('testing@web-designpakistan.com')
 
 mail = Mail(app)
 
-sentiment_model = training()
+
 
 def sendContactForm(result):
     msg = Message("Contact Form from Emosight",
