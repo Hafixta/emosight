@@ -40,16 +40,17 @@ sentiment_model = training()
 def sendContactForm(result):
     msg = Message("Contact Form from Emosight",
                   sender=app.config['MAIL_USERNAME'],
-                  recipients=["alivealive909@gmail.com", "hafixta@gmail.com "])
+                  recipients=["alivealive909@gmail.com", "iamshushanna@gmail.com"])
 
     msg.body = """
-    Hello there,
-    You just received a contact form.
+    Hello Shushanna,
+    You just received a contact form from Visitor.
+
     Name: {}
     Email: {}
     Message: {}
     regards,
-    Webmaster
+    Shana
     """.format(result['name'], result['email'], result['message'])
 
     mail.send(msg)
