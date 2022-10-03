@@ -21,7 +21,38 @@ app.config["SECRET_KEY"]
 app.config['MONGO_URI'] = "mongodb://emosight:j5R1LYFyPkzkNz7csvGqtzcAphbJE8zd3ViR7TcoenEL78Up5gRS2KB7Xqf7tzz4KbKnTngi9Rp7e4pqPga2RQ==@emosight.mongo.cosmos.azure.com:10255/register_users?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@emosight@"
 mongo = PyMongo(app)
 reg_users = mongo
+
+
+
+
+app.config['MAIL_SERVER'] = 'mail.web-design-johannesburg.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = 'testing@web-design-johannesburg.com'
+app.config['MAIL_PASSWORD'] = 'testingpassword'
+
+mail = Mail(app)
+
 sentiment_model = training()
+
+def sendContactForm(result):
+    msg = Message("Contact Form from Skolo Website",
+                  sender="testing@web-design-johannesburg.com",
+                  recipients=["matshidis@gmail.com", "bertha.kgokong@tatisoftware.com"])
+
+    msg.body = """
+    Hello there,
+    You just received a contact form.
+    Name: {}
+    Email: {}
+    Message: {}
+    regards,
+    Webmaster
+    """.format(result['name'], result['email'], result['message'])
+
+    mail.send(msg)
+
+
 
 
 @app.route('/')
@@ -95,7 +126,19 @@ def dashboard():
 
 @app.route('/contact', methods=["GET","POST"])
 def contact():
-    return render_template('contact.html')
+    if request.method == 'POST':
+        result = {}
+        
+        result['name'] = request.form['name']
+        result['email'] = request.form['email'].replace(' ', '').lower()
+        result['message'] = request.form['message']
+
+        sendContactForm(result)
+
+        return render_template('contact.html', **locals())
+
+
+    return render_template('contact.html', **locals())
 
 
 @app.route('/emosight')
