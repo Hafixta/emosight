@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .contact {
   display: flex;
   flex-direction: column;
@@ -56,62 +55,3 @@ button:hover {
 #text{
   text-align: center;
 }
-=======
-.contact {
-  display: flex;
-  flex-direction: column;
-  min-height: 60vh;
-  margin-top: 5%;
-}
-
-.form {
-  display: flex;
-  margin: 0 30%;
-  justify-content: center;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.custom-input {
-  padding: 12px 10px;
-  font-size: 14px;
-  background-color: #e6e6e6;
-  border: none;
-  border-radius: 5px;
-}
-
-input:focus {
-  outline: none;
-}
-
-textarea {
-  padding: 12px 10px;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px;
-  background-color: #e6e6e6;
-}
-
-textarea:focus {
-  outline: none;
-}
-
-.btn-cont {
-  margin: 0 auto;
-  border-radius: 5px;
-  margin-top: 70px;
-  width: 250px;
-  padding: 12px 10px;
-  background-color: #1a1a1a;
-  color: white;
-  text-transform: uppercase;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-#text{
-  text-align: center;
-}
->>>>>>> 509e8d050e1faf7bab40b7e3ac6bcc8ccf86ccdf
