@@ -102,7 +102,7 @@ def signup_user():
             session['email'] = request.form['email']
             return redirect(url_for('dashboard'))
         else:
-            return "user already exists"
+            return redirect(url_for('login'))
 
 
 @app.route('/login')
